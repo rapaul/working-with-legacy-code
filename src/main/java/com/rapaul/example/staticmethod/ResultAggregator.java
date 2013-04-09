@@ -6,20 +6,20 @@ import java.util.List;
 public class ResultAggregator {
 	
 	public AggregateSummary aggregateSummary(Patient patient) {
-		List<Result> pendingRecords = RecordFetcher.getRecordsFor(patient);
+		List<Result> pendingResults = ResultFetcher.getResultsFor(patient);
 		int sum = 0;
 		int minimum = 0;
 		int maximum = 0;
-		for (Result record : pendingRecords) {
-			sum = record.getValue();
-			if (record.getValue() < minimum) {
-				minimum = record.getValue();
+		for (Result result : pendingResults) {
+			sum = result.getValue();
+			if (result.getValue() < minimum) {
+				minimum = result.getValue();
 			}
-			if (record.getValue() > maximum) {
-				maximum = record.getValue();
+			if (result.getValue() > maximum) {
+				maximum = result.getValue();
 			}
 		}
-		BigDecimal count = new BigDecimal(pendingRecords.size());
+		BigDecimal count = new BigDecimal(pendingResults.size());
 		BigDecimal mean = new BigDecimal(sum).divide(count);
 		return new AggregateSummary(mean, minimum, maximum);
 	}
