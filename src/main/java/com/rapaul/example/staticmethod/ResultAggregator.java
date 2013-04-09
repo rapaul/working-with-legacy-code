@@ -5,12 +5,8 @@ import java.util.List;
 
 public class ResultAggregator {
 	
-	private ResultFetcher resultFetcher;
+	private final ResultFetcher resultFetcher;
 
-	public ResultAggregator() {	// Preserve hardcoded behaviour
-		resultFetcher = new ManagerDelegatingResultFetcher();
-	}
-	
 	public ResultAggregator(ResultFetcher resultFetcher) {
 		this.resultFetcher = resultFetcher;
 	}
