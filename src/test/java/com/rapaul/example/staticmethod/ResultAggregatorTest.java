@@ -3,6 +3,8 @@ package com.rapaul.example.staticmethod;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -26,25 +28,8 @@ public class ResultAggregatorTest {
 	}
 
 	private AggregateSummary aggregateFor(Patient patient, List<Result> results) {
-		return new TestResultAggregator(patient, results).aggregateSummary(patient);
-	}
-
-	private final class TestResultAggregator extends ResultAggregator {
-
-		private Patient testPatient;
-		private List<Result> testResults;
-
-		public TestResultAggregator(Patient patient, List<Result> results) {
-			this.testPatient = patient;
-			this.testResults = results;
-		}
-
-		@Override
-		protected List<Result> fetchResultsFor(Patient patient) {
-			if (patient != testPatient) {
-				throw new IllegalStateException("Expected a different patient, got: " + patient);
-			}
-			return testResults;
-		}
+		ResultFetcher resultFetcher = mock(ResultFetcher.class);
+		given(resultFetcher.getResultsFor(patient)).willReturn(results);
+		return new ResultAggregator(resultFetcher).aggregateSummary(patient);
 	}
 }

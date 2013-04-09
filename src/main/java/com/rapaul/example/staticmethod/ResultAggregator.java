@@ -5,8 +5,18 @@ import java.util.List;
 
 public class ResultAggregator {
 	
+	private ResultFetcher resultFetcher;
+
+	public ResultAggregator() {	// Preserve hardcoded behaviour
+		resultFetcher = new ManagerDelegatingResultFetcher();
+	}
+	
+	public ResultAggregator(ResultFetcher resultFetcher) {
+		this.resultFetcher = resultFetcher;
+	}
+	
 	public AggregateSummary aggregateSummary(Patient patient) {
-		List<Result> pendingResults = fetchResultsFor(patient);
+		List<Result> pendingResults = resultFetcher.getResultsFor(patient);
 		int sum = 0;
 		int minimum = 0;
 		int maximum = 0;
@@ -22,10 +32,6 @@ public class ResultAggregator {
 		BigDecimal count = new BigDecimal(pendingResults.size());
 		BigDecimal mean = new BigDecimal(sum).divide(count);
 		return new AggregateSummary(mean, minimum, maximum);
-	}
-
-	protected List<Result> fetchResultsFor(Patient patient) {
-		return ResultFetcher.getResultsFor(patient);
 	}
 
 }
