@@ -41,6 +41,9 @@ public class ResultAggregatorTest {
 
 		@Override
 		protected List<Result> fetchResultsFor(Patient patient) {
+			if (patient != testPatient) {
+				throw new IllegalStateException("Expected a different patient, got: " + patient);
+			}
 			return testResults;
 		}
 	}
