@@ -25,23 +25,23 @@ public class ResultAggregatorTest {
 		assertThat(aggregateSummary.getMean(), is(new BigDecimal(1.5)));
 	}
 
-	private AggregateSummary aggregateFor(Patient patient, List<Result> records) {
-		return new TestResultAggregator(patient, records).aggregateSummary(patient);
+	private AggregateSummary aggregateFor(Patient patient, List<Result> results) {
+		return new TestResultAggregator(patient, results).aggregateSummary(patient);
 	}
 
 	private final class TestResultAggregator extends ResultAggregator {
 
 		private Patient testPatient;
-		private List<Result> testRecords;
+		private List<Result> testResults;
 
-		public TestResultAggregator(Patient patient, List<Result> records) {
+		public TestResultAggregator(Patient patient, List<Result> results) {
 			this.testPatient = patient;
-			this.testRecords = records;
+			this.testResults = results;
 		}
 
 		@Override
-		protected List<Result> fetchRecordsFor(Patient patient) {
-			return testRecords;
+		protected List<Result> fetchResultsFor(Patient patient) {
+			return testResults;
 		}
 	}
 }
