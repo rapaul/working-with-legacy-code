@@ -1,7 +1,7 @@
 package com.rapaul.example.staticmethod;
 
 public class Patient {
-	
+
 	private String id;
 
 	public Patient(String id) {
