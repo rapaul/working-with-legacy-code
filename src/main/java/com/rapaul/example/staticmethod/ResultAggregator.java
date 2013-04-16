@@ -25,7 +25,7 @@ public class ResultAggregator {
 	}
 
 	protected List<Result> fetchResultsFor(Patient patient) {
-		return ResultFetcher.getResultsFor(patient);
+		return ResultManager.getResultsFor(patient);
 	}
 
 }
