@@ -10,4 +10,4 @@ Possible solutions are codified in branches, e.g.
 
 Getting Started
 ===============
-The simplest way to get started is to import as a Maven project using pom.xml
+The simplest way to get started is to import a project from the examples directory as a Maven project using the pom.xml
