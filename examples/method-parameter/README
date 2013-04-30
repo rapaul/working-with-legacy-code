@@ -1,0 +1,6 @@
+Our patients results can be uploaded via an HTTP request. The customer now wants to send in Results via Email in addition to through the website.
+
+Your task is to:
+* Make the existing test pass
+* Adapt the code safely to support alternative input sources for result uploads
+* You'll want to look at the 'adapt parameter' dependency breaking technique
